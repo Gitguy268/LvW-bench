@@ -22,7 +22,7 @@ jobs:
         run: |
           go build -o lvwb ./cmd/lvwb
           ./lvwb webdata web/data results
-      - uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v4
         with:
           path: web
