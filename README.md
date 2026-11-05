@@ -9,6 +9,7 @@ scored on your own machine.
 [Docs](https://gitguy268.github.io/LvW-bench/docs.html) ·
 [Run in browser](https://gitguy268.github.io/LvW-bench/run.html) ·
 [Dataset](https://huggingface.co/datasets/Lucasgitguy-co/LvW-bench) ·
+[HF Space](https://huggingface.co/spaces/Lucasgitguy-co/LvW-bench-leaderboard) ·
 [Install](#install) · [Usage](#usage) · [How it scores](#how-it-scores)
 
 [![CI](https://github.com/Gitguy268/LvW-bench/actions/workflows/ci.yml/badge.svg)](https://github.com/Gitguy268/LvW-bench/actions/workflows/ci.yml)
