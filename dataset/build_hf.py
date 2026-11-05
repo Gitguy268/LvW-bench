@@ -44,6 +44,9 @@ def main():
             split = split_file.stem
             rows = [json.loads(l) for l in split_file.read_text().splitlines() if l]
             table = pa.Table.from_pylist(rows)
+            if "choices" in table.column_names:  # empty lists would otherwise be typed list<null>
+                i = table.column_names.index("choices")
+                table = table.set_column(i, "choices", table.column("choices").cast(pa.list_(pa.string())))
             dst = OUT / cfg / f"{split}-00000-of-00001.parquet"
             dst.parent.mkdir(parents=True, exist_ok=True)
             pq.write_table(table, dst, compression="zstd")

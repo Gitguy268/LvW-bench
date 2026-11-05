@@ -180,7 +180,7 @@ Trained on the same task as a workflow (the Spot Snake models learned `spot_snak
 | 8 | [bartowski/SmolLM2-360M-Instruct-GGUF](https://huggingface.co/bartowski/SmolLM2-360M-Instruct-GGUF) · GGUF Q4_K_M | 0.129 | 0.087–0.171 | 0.075 | 0.075 | 0.100 | 0.050 | 0.250 | 0.225 | 507 | 203 |
 | 9 | [Lucasgitguy-co/minimind-mermaid-run2](https://huggingface.co/Lucasgitguy-co/minimind-mermaid-run2)/ep3 · safetensors | 0.033 | 0.013–0.058 | 0.000 | 0.000 | 0.000 | 0.000 | 0.175 | 0.025 | 2202 | 370 |
 
-Only d1-2B beats the Prior row on System 1 accuracy: the text models answer typed decisions through one token and are poorly calibrated. The Spot Snake fine-tunes gain on `spot_snake` but lose on the other four workflows.
+Among zero-shot models only d1-2B beats the Prior row on System 1 accuracy: the text models answer typed decisions through one token and are poorly calibrated (the two Spot Snake d1 specialists also beat it). The Spot Snake fine-tunes gain on `spot_snake` but lose on the other four workflows.
 <!-- leaderboard:end -->
 
 ## How it scores
