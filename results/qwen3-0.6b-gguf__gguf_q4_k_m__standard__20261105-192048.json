@@ -1,0 +1,152 @@
+{
+  "bench": "LvW-bench",
+  "bench_version": "0.1.0",
+  "created": "2026-11-05T19:20:48.131618Z",
+  "model": {
+    "label": "Qwen3-0.6B-GGUF · GGUF Q4_K_M",
+    "input": "unsloth/Qwen3-0.6B-GGUF",
+    "format": "gguf",
+    "repo": "unsloth/Qwen3-0.6B-GGUF",
+    "sha": "50968a4468ef4233ed78cd7c3de230dd1d61a56b",
+    "file": "Qwen3-0.6B-Q4_K_M.gguf",
+    "quant": "Q4_K_M",
+    "size_bytes": 396705472,
+    "backend": "llama.cpp"
+  },
+  "mode": "general",
+  "profile": "standard",
+  "seed": 0,
+  "tracks": {
+    "answer": {
+      "accuracy": 0.2983,
+      "ci_low": 0.273,
+      "ci_high": 0.3263,
+      "n": 1143,
+      "mean_output_tokens": 56.8,
+      "tokens_per_second": 128.8,
+      "p50_ms": 1271.7,
+      "wall_seconds": 504.4,
+      "per_config": {
+        "generated": {
+          "n": 225,
+          "accuracy": 0.2667
+        },
+        "gsm8k": {
+          "n": 200,
+          "accuracy": 0.025
+        },
+        "ifeval": {
+          "n": 200,
+          "accuracy": 0.605
+        },
+        "mmlu": {
+          "n": 228,
+          "accuracy": 0.386
+        },
+        "mmlu_pro": {
+          "n": 140,
+          "accuracy": 0.1357
+        },
+        "truthfulqa": {
+          "n": 150,
+          "accuracy": 0.32
+        }
+      }
+    },
+    "decide": {
+      "accuracy": 0.3727,
+      "ci_low": 0.3493,
+      "ci_high": 0.396,
+      "kl_from_gold": 1.6804,
+      "brier": 0.7524,
+      "ece": 0.4103,
+      "n": 1500,
+      "coverage": 1,
+      "adapter": "logprobs",
+      "p50_ms": 1494.3,
+      "wall_seconds": 193.6,
+      "per_config": {
+        "calendar": {
+          "n": 300,
+          "accuracy": 0.4133,
+          "kl_from_gold": 1.6341,
+          "brier": 0.671,
+          "ece": 0.2716
+        },
+        "code_review": {
+          "n": 300,
+          "accuracy": 0.36,
+          "kl_from_gold": 1.7265,
+          "brier": 0.7574,
+          "ece": 0.4257
+        },
+        "delivery": {
+          "n": 300,
+          "accuracy": 0.41,
+          "kl_from_gold": 1.8728,
+          "brier": 0.6537,
+          "ece": 0.4482
+        },
+        "it_support": {
+          "n": 300,
+          "accuracy": 0.3767,
+          "kl_from_gold": 1.0504,
+          "brier": 0.6224,
+          "ece": 0.4039
+        },
+        "spot_snake": {
+          "n": 300,
+          "accuracy": 0.3033,
+          "kl_from_gold": 2.1182,
+          "brier": 1.0575,
+          "ece": 0.5354
+        }
+      }
+    },
+    "reason": {
+      "accuracy": 0.3125,
+      "ci_low": 0.2542,
+      "ci_high": 0.3708,
+      "n": 240,
+      "mean_output_tokens": 924.3,
+      "tokens_per_second": 186.7,
+      "p50_ms": 12328.3,
+      "wall_seconds": 1188.4,
+      "truncation_rate": 0.1833,
+      "native_thinking": true,
+      "per_config": {
+        "generated": {
+          "n": 40,
+          "accuracy": 0.45
+        },
+        "gsm8k": {
+          "n": 40,
+          "accuracy": 0.65
+        },
+        "ifeval": {
+          "n": 40,
+          "accuracy": 0.65
+        },
+        "mmlu": {
+          "n": 40,
+          "accuracy": 0.075
+        },
+        "mmlu_pro": {
+          "n": 40,
+          "accuracy": 0.025
+        },
+        "truthfulqa": {
+          "n": 40,
+          "accuracy": 0.025
+        }
+      }
+    }
+  },
+  "system": {
+    "arch": "arm64",
+    "cpus": "10",
+    "engine": "llama.cpp 0.8.0-dev (build 12059, commit 1b6935b22)",
+    "lvwb": "0.1.0",
+    "os": "darwin"
+  }
+}

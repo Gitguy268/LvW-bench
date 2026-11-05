@@ -124,6 +124,62 @@ Bench 0.1.0, `standard` profile, all runs local. The live version with sorting a
 columns is on the [leaderboard page](https://gitguy268.github.io/LvW-bench/).
 
 <!-- leaderboard:start -->
+#### System 1 · decide
+
+| # | Model | Accuracy ↑ | KL ↓ | Brier ↓ | ECE ↓ | Coverage | p50 / case | Adapter |
+|---|---|---|---|---|---|---|---|---|
+| 1 | [LiquidAI/d1-2B-GGUF](https://huggingface.co/LiquidAI/d1-2B-GGUF) · GGUF Q4_K_M | 0.580 | 0.635 | 0.360 | 0.107 | 100% | 1698 ms | systemone |
+| 2 | [Lucasgitguy-co/lfm3-vl-2b-heretic-gguf](https://huggingface.co/Lucasgitguy-co/lfm3-vl-2b-heretic-gguf) · GGUF Q4_K_M | 0.432 | 1.914 | 0.684 | 0.359 | 100% | 3294 ms | logprobs |
+| 3 | [LiquidAI/LFM2-350M-GGUF](https://huggingface.co/LiquidAI/LFM2-350M-GGUF) · GGUF Q4_K_M | 0.410 | 1.320 | 0.555 | 0.240 | 100% | 918 ms | logprobs |
+| 4 | [Lucasgitguy-co/minicpm-mermaid-gguf](https://huggingface.co/Lucasgitguy-co/minicpm-mermaid-gguf) · GGUF Q4_K_M | 0.396 | 1.606 | 0.685 | 0.378 | 100% | 3424 ms | logprobs |
+| 5 | [bartowski/SmolLM2-1.7B-Instruct-GGUF](https://huggingface.co/bartowski/SmolLM2-1.7B-Instruct-GGUF) · GGUF Q4_K_M | 0.383 | 0.813 | 0.479 | 0.144 | 100% | 3183 ms | logprobs |
+| 6 | [unsloth/Qwen3-0.6B-GGUF](https://huggingface.co/unsloth/Qwen3-0.6B-GGUF) · GGUF Q4_K_M | 0.373 | 1.680 | 0.752 | 0.410 | 100% | 1494 ms | logprobs |
+| 7 | [Lucasgitguy-co/minimind-mermaid-run2](https://huggingface.co/Lucasgitguy-co/minimind-mermaid-run2)/ep3 · safetensors | 0.353 | 2.669 | 0.631 | 0.347 | 79% | 335 ms | logprobs |
+| 8 | [LiquidAI/LFM2-1.2B-GGUF](https://huggingface.co/LiquidAI/LFM2-1.2B-GGUF) · GGUF Q4_K_M | 0.299 | 1.980 | 0.798 | 0.489 | 100% | 2286 ms | logprobs |
+| 9 | [bartowski/SmolLM2-135M-Instruct-GGUF](https://huggingface.co/bartowski/SmolLM2-135M-Instruct-GGUF) · GGUF Q4_K_M | 0.282 | 0.888 | 0.519 | 0.224 | 100% | 175 ms | logprobs |
+| 10 | [bartowski/SmolLM2-360M-Instruct-GGUF](https://huggingface.co/bartowski/SmolLM2-360M-Instruct-GGUF) · GGUF Q4_K_M | 0.271 | 0.909 | 0.505 | 0.203 | 100% | 577 ms | logprobs |
+| – | Prior (ignores the input) | 0.482 | 0.631 | 0.373 | 0.022 | – | – | reference |
+| – | Uniform (same probability on every option) | 0.331 | 0.709 | 0.429 | 0.105 | – | – | reference |
+
+#### System 1 · decide: specialists
+
+Trained on the same task as a workflow (the Spot Snake models learned `spot_snake` moves with the same teacher), so not comparable with the zero-shot table.
+
+| # | Model | Accuracy ↑ | KL ↓ | Brier ↓ | ECE ↓ | Coverage | p50 / case | Adapter |
+|---|---|---|---|---|---|---|---|---|
+| 1 | [Lucasgitguy-co/spot-snake-d1-3B-v0.1](https://huggingface.co/Lucasgitguy-co/spot-snake-d1-3B-v0.1) · GGUF Q4_K_M | 0.563 | 2.372 | 0.487 | 0.272 | 100% | 2172 ms | systemone |
+| 2 | [Lucasgitguy-co/spot-snake-d1-2B-v0.1](https://huggingface.co/Lucasgitguy-co/spot-snake-d1-2B-v0.1) · GGUF Q4_K_M | 0.535 | 1.722 | 0.565 | 0.329 | 100% | 1564 ms | systemone |
+| 3 | [Lucasgitguy-co/spot-snake-minimind-jev-v0.1](https://huggingface.co/Lucasgitguy-co/spot-snake-minimind-jev-v0.1) · safetensors | 0.334 | 0.709 | 0.429 | 0.102 | 7% | 0 ms | systemone |
+
+#### System 2 · answer
+
+| # | Model | Accuracy ↑ | 95% CI | gsm8k | mmlu | mmlu_pro | truthfulqa | ifeval | generated | tok/answer | tok/s |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | [Lucasgitguy-co/minicpm-mermaid-gguf](https://huggingface.co/Lucasgitguy-co/minicpm-mermaid-gguf) · GGUF Q4_K_M | 0.396 | 0.368–0.425 | 0.080 | 0.535 | 0.186 | 0.360 | 0.710 | 0.413 | 27 | 57 |
+| 2 | [LiquidAI/LFM2-1.2B-GGUF](https://huggingface.co/LiquidAI/LFM2-1.2B-GGUF) · GGUF Q4_K_M | 0.385 | 0.355–0.413 | 0.010 | 0.504 | 0.150 | 0.333 | 0.755 | 0.449 | 74 | 159 |
+| 3 | [Lucasgitguy-co/lfm3-vl-2b-heretic-gguf](https://huggingface.co/Lucasgitguy-co/lfm3-vl-2b-heretic-gguf) · GGUF Q4_K_M | 0.382 | 0.355–0.410 | 0.045 | 0.408 | 0.186 | 0.360 | 0.735 | 0.480 | 54 | 91 |
+| 4 | [bartowski/SmolLM2-1.7B-Instruct-GGUF](https://huggingface.co/bartowski/SmolLM2-1.7B-Instruct-GGUF) · GGUF Q4_K_M | 0.305 | 0.279–0.333 | 0.030 | 0.548 | 0.171 | 0.213 | 0.530 | 0.249 | 64 | 82 |
+| 5 | [unsloth/Qwen3-0.6B-GGUF](https://huggingface.co/unsloth/Qwen3-0.6B-GGUF) · GGUF Q4_K_M | 0.298 | 0.273–0.326 | 0.025 | 0.386 | 0.136 | 0.320 | 0.605 | 0.267 | 57 | 129 |
+| 6 | [LiquidAI/LFM2-350M-GGUF](https://huggingface.co/LiquidAI/LFM2-350M-GGUF) · GGUF Q4_K_M | 0.269 | 0.241–0.293 | 0.020 | 0.447 | 0.121 | 0.220 | 0.565 | 0.169 | 89 | 346 |
+| 7 | [bartowski/SmolLM2-360M-Instruct-GGUF](https://huggingface.co/bartowski/SmolLM2-360M-Instruct-GGUF) · GGUF Q4_K_M | 0.212 | 0.187–0.236 | 0.045 | 0.259 | 0.136 | 0.207 | 0.390 | 0.204 | 82 | 233 |
+| 8 | [bartowski/SmolLM2-135M-Instruct-GGUF](https://huggingface.co/bartowski/SmolLM2-135M-Instruct-GGUF) · GGUF Q4_K_M | 0.158 | 0.137–0.181 | 0.015 | 0.228 | 0.100 | 0.213 | 0.225 | 0.156 | 110 | 749 |
+| 9 | [Lucasgitguy-co/minimind-mermaid-run2](https://huggingface.co/Lucasgitguy-co/minimind-mermaid-run2)/ep3 · safetensors | 0.029 | 0.019–0.039 | 0.010 | 0.009 | 0.007 | 0.000 | 0.105 | 0.031 | 193 | 399 |
+
+#### System 2 · reason
+
+| # | Model | Accuracy ↑ | 95% CI | gsm8k | mmlu | mmlu_pro | truthfulqa | ifeval | generated | tok/answer | tok/s |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | [LiquidAI/LFM2-1.2B-GGUF](https://huggingface.co/LiquidAI/LFM2-1.2B-GGUF) · GGUF Q4_K_M | 0.517 | 0.450–0.579 | 0.600 | 0.500 | 0.300 | 0.375 | 0.750 | 0.575 | 461 | 206 |
+| 2 | [Lucasgitguy-co/lfm3-vl-2b-heretic-gguf](https://huggingface.co/Lucasgitguy-co/lfm3-vl-2b-heretic-gguf) · GGUF Q4_K_M | 0.508 | 0.450–0.571 | 0.700 | 0.500 | 0.250 | 0.375 | 0.450 | 0.775 | 1477 | 140 |
+| 3 | [Lucasgitguy-co/minicpm-mermaid-gguf](https://huggingface.co/Lucasgitguy-co/minicpm-mermaid-gguf) · GGUF Q4_K_M | 0.404 | 0.338–0.463 | 0.100 | 0.475 | 0.350 | 0.425 | 0.650 | 0.425 | 488 | 168 |
+| 4 | [bartowski/SmolLM2-1.7B-Instruct-GGUF](https://huggingface.co/bartowski/SmolLM2-1.7B-Instruct-GGUF) · GGUF Q4_K_M | 0.379 | 0.317–0.442 | 0.400 | 0.500 | 0.275 | 0.200 | 0.425 | 0.475 | 316 | 103 |
+| 5 | [LiquidAI/LFM2-350M-GGUF](https://huggingface.co/LiquidAI/LFM2-350M-GGUF) · GGUF Q4_K_M | 0.317 | 0.258–0.375 | 0.425 | 0.400 | 0.200 | 0.125 | 0.500 | 0.250 | 350 | 502 |
+| 6 | [unsloth/Qwen3-0.6B-GGUF](https://huggingface.co/unsloth/Qwen3-0.6B-GGUF) · GGUF Q4_K_M | 0.312 | 0.254–0.371 | 0.650 | 0.075 | 0.025 | 0.025 | 0.650 | 0.450 | 924 | 187 |
+| 7 | [bartowski/SmolLM2-135M-Instruct-GGUF](https://huggingface.co/bartowski/SmolLM2-135M-Instruct-GGUF) · GGUF Q4_K_M | 0.146 | 0.104–0.192 | 0.025 | 0.150 | 0.225 | 0.150 | 0.225 | 0.100 | 954 | 603 |
+| 8 | [bartowski/SmolLM2-360M-Instruct-GGUF](https://huggingface.co/bartowski/SmolLM2-360M-Instruct-GGUF) · GGUF Q4_K_M | 0.129 | 0.087–0.171 | 0.075 | 0.075 | 0.100 | 0.050 | 0.250 | 0.225 | 507 | 203 |
+| 9 | [Lucasgitguy-co/minimind-mermaid-run2](https://huggingface.co/Lucasgitguy-co/minimind-mermaid-run2)/ep3 · safetensors | 0.033 | 0.013–0.058 | 0.000 | 0.000 | 0.000 | 0.000 | 0.175 | 0.025 | 2202 | 370 |
+
+Only d1-2B beats the Prior row on System 1 accuracy: the text models answer typed decisions through one token and are poorly calibrated. The Spot Snake fine-tunes gain on `spot_snake` but lose on the other four workflows.
 <!-- leaderboard:end -->
 
 ## How it scores

@@ -1,0 +1,79 @@
+{
+  "bench": "LvW-bench",
+  "bench_version": "0.1.0",
+  "created": "2026-11-05T18:29:56.933547Z",
+  "model": {
+    "label": "spot-snake-d1-2B-v0.1 · GGUF Q4_K_M",
+    "input": "Lucasgitguy-co/spot-snake-d1-2B-v0.1",
+    "format": "gguf",
+    "repo": "Lucasgitguy-co/spot-snake-d1-2B-v0.1",
+    "sha": "baf2bb6a85d3962af091dbf03a44d4377ff57aaa",
+    "file": "gguf/model-Q4_K_M.gguf",
+    "quant": "Q4_K_M",
+    "size_bytes": 1099629824,
+    "backend": "llama.cpp"
+  },
+  "mode": "specialist",
+  "profile": "standard",
+  "seed": 0,
+  "tracks": {
+    "decide": {
+      "accuracy": 0.5347,
+      "ci_low": 0.5087,
+      "ci_high": 0.56,
+      "kl_from_gold": 1.7218,
+      "brier": 0.5651,
+      "ece": 0.329,
+      "n": 1500,
+      "coverage": 1,
+      "adapter": "systemone",
+      "p50_ms": 1564.4,
+      "wall_seconds": 391.5,
+      "per_config": {
+        "calendar": {
+          "n": 300,
+          "accuracy": 0.52,
+          "kl_from_gold": 1.6238,
+          "brier": 0.6336,
+          "ece": 0.3574
+        },
+        "code_review": {
+          "n": 300,
+          "accuracy": 0.47,
+          "kl_from_gold": 1.707,
+          "brier": 0.5973,
+          "ece": 0.3736
+        },
+        "delivery": {
+          "n": 300,
+          "accuracy": 0.4667,
+          "kl_from_gold": 2.1902,
+          "brier": 0.573,
+          "ece": 0.4357
+        },
+        "it_support": {
+          "n": 300,
+          "accuracy": 0.5733,
+          "kl_from_gold": 1.547,
+          "brier": 0.5296,
+          "ece": 0.2828
+        },
+        "spot_snake": {
+          "n": 300,
+          "accuracy": 0.6433,
+          "kl_from_gold": 1.5409,
+          "brier": 0.492,
+          "ece": 0.2215
+        }
+      }
+    }
+  },
+  "system": {
+    "arch": "arm64",
+    "cpus": "10",
+    "engine": "llama.cpp 0.8.0-dev (build 12059, commit 1b6935b22)",
+    "lvwb": "0.1.0",
+    "os": "darwin"
+  },
+  "notes": "trained on Spot Snake moves with the same teacher and text as the spot_snake workflow"
+}

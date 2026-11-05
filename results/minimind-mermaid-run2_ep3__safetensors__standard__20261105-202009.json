@@ -1,0 +1,149 @@
+{
+  "bench": "LvW-bench",
+  "bench_version": "0.1.0",
+  "created": "2026-11-05T20:20:09.805591Z",
+  "model": {
+    "label": "minimind-mermaid-run2/ep3 · safetensors",
+    "input": "Lucasgitguy-co/minimind-mermaid-run2",
+    "format": "safetensors",
+    "repo": "Lucasgitguy-co/minimind-mermaid-run2",
+    "sha": "1d1ff9a5bef6f00d4b19a8e6b32da50e5490f973",
+    "file": "ep3/",
+    "quant": "safetensors",
+    "backend": "transformers"
+  },
+  "mode": "general",
+  "profile": "standard",
+  "seed": 0,
+  "tracks": {
+    "answer": {
+      "accuracy": 0.0289,
+      "ci_low": 0.0192,
+      "ci_high": 0.0394,
+      "n": 1143,
+      "mean_output_tokens": 193,
+      "tokens_per_second": 398.9,
+      "p50_ms": 375.4,
+      "wall_seconds": 553,
+      "per_config": {
+        "generated": {
+          "n": 225,
+          "accuracy": 0.0311
+        },
+        "gsm8k": {
+          "n": 200,
+          "accuracy": 0.01
+        },
+        "ifeval": {
+          "n": 200,
+          "accuracy": 0.105
+        },
+        "mmlu": {
+          "n": 228,
+          "accuracy": 0.0088
+        },
+        "mmlu_pro": {
+          "n": 140,
+          "accuracy": 0.0071
+        },
+        "truthfulqa": {
+          "n": 150,
+          "accuracy": 0
+        }
+      }
+    },
+    "decide": {
+      "accuracy": 0.3533,
+      "ci_low": 0.3293,
+      "ci_high": 0.3787,
+      "kl_from_gold": 2.6687,
+      "brier": 0.631,
+      "ece": 0.3469,
+      "n": 1500,
+      "coverage": 0.792,
+      "adapter": "logprobs",
+      "p50_ms": 334.6,
+      "wall_seconds": 42.1,
+      "per_config": {
+        "calendar": {
+          "n": 300,
+          "accuracy": 0.44,
+          "kl_from_gold": 0.9614,
+          "brier": 0.5622,
+          "ece": 0.2566
+        },
+        "code_review": {
+          "n": 300,
+          "accuracy": 0.2933,
+          "kl_from_gold": 3.3987,
+          "brier": 0.6886,
+          "ece": 0.4066
+        },
+        "delivery": {
+          "n": 300,
+          "accuracy": 0.4567,
+          "kl_from_gold": 4.4916,
+          "brier": 0.5352,
+          "ece": 0.3419
+        },
+        "it_support": {
+          "n": 300,
+          "accuracy": 0.2033,
+          "kl_from_gold": 1.878,
+          "brier": 0.6327,
+          "ece": 0.3381
+        },
+        "spot_snake": {
+          "n": 300,
+          "accuracy": 0.3733,
+          "kl_from_gold": 2.6141,
+          "brier": 0.7363,
+          "ece": 0.4051
+        }
+      }
+    },
+    "reason": {
+      "accuracy": 0.0333,
+      "ci_low": 0.0125,
+      "ci_high": 0.0583,
+      "n": 240,
+      "mean_output_tokens": 2201.6,
+      "tokens_per_second": 370.5,
+      "p50_ms": 22039,
+      "wall_seconds": 1426,
+      "per_config": {
+        "generated": {
+          "n": 40,
+          "accuracy": 0.025
+        },
+        "gsm8k": {
+          "n": 40,
+          "accuracy": 0
+        },
+        "ifeval": {
+          "n": 40,
+          "accuracy": 0.175
+        },
+        "mmlu": {
+          "n": 40,
+          "accuracy": 0
+        },
+        "mmlu_pro": {
+          "n": 40,
+          "accuracy": 0
+        },
+        "truthfulqa": {
+          "n": 40,
+          "accuracy": 0
+        }
+      }
+    }
+  },
+  "system": {
+    "arch": "arm64",
+    "cpus": "10",
+    "engine": "transformers 5.22.1, torch 2.15.0, mps",
+    "lvwb": "0.1.0",
+    "os": "darwin"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "bench": "LvW-bench",
+  "bench_version": "0.1.0",
+  "created": "2026-11-05T18:45:17.025802Z",
+  "model": {
+    "label": "spot-snake-minimind-jev-v0.1 · safetensors",
+    "input": "Lucasgitguy-co/spot-snake-minimind-jev-v0.1",
+    "format": "safetensors",
+    "repo": "Lucasgitguy-co/spot-snake-minimind-jev-v0.1",
+    "sha": "e3bf59d34b534cec9d373102f4a80c3b3212c58e",
+    "quant": "safetensors",
+    "backend": "transformers"
+  },
+  "mode": "specialist",
+  "profile": "standard",
+  "seed": 0,
+  "tracks": {
+    "decide": {
+      "accuracy": 0.334,
+      "ci_low": 0.3087,
+      "ci_high": 0.3587,
+      "kl_from_gold": 0.7089,
+      "brier": 0.4294,
+      "ece": 0.1015,
+      "n": 1500,
+      "coverage": 0.0667,
+      "adapter": "systemone",
+      "p50_ms": 0.4,
+      "wall_seconds": 1.1,
+      "per_config": {
+        "calendar": {
+          "n": 300,
+          "accuracy": 0.51,
+          "kl_from_gold": 0.7947,
+          "brier": 0.4809,
+          "ece": 0.1767
+        },
+        "code_review": {
+          "n": 300,
+          "accuracy": 0.3233,
+          "kl_from_gold": 0.5956,
+          "brier": 0.3786,
+          "ece": 0.0956
+        },
+        "delivery": {
+          "n": 300,
+          "accuracy": 0.3,
+          "kl_from_gold": 0.6338,
+          "brier": 0.3441,
+          "ece": 0.05
+        },
+        "it_support": {
+          "n": 300,
+          "accuracy": 0.2033,
+          "kl_from_gold": 0.7958,
+          "brier": 0.4645,
+          "ece": 0.14
+        },
+        "spot_snake": {
+          "n": 300,
+          "accuracy": 0.3333,
+          "kl_from_gold": 0.7247,
+          "brier": 0.4789,
+          "ece": 0.2051
+        }
+      }
+    }
+  },
+  "system": {
+    "arch": "arm64",
+    "cpus": "10",
+    "engine": "transformers 5.22.1, torch 2.15.0, mps",
+    "lvwb": "0.1.0",
+    "os": "darwin"
+  },
+  "notes": "trained on Spot Snake moves with the same teacher and text as the spot_snake workflow"
+}

@@ -1,0 +1,78 @@
+{
+  "bench": "LvW-bench",
+  "bench_version": "0.1.0",
+  "created": "2026-11-05T18:45:37.447616Z",
+  "model": {
+    "label": "d1-2B-GGUF · GGUF Q4_K_M",
+    "input": "LiquidAI/d1-2B-GGUF",
+    "format": "gguf",
+    "repo": "LiquidAI/d1-2B-GGUF",
+    "sha": "4a181094d1b6addfaa3a0956f78e7ab2aa406a0c",
+    "file": "d1-2B-Q4_K_M.gguf",
+    "quant": "Q4_K_M",
+    "size_bytes": 1099629888,
+    "backend": "llama.cpp"
+  },
+  "mode": "general",
+  "profile": "standard",
+  "seed": 0,
+  "tracks": {
+    "decide": {
+      "accuracy": 0.58,
+      "ci_low": 0.554,
+      "ci_high": 0.6047,
+      "kl_from_gold": 0.6352,
+      "brier": 0.3605,
+      "ece": 0.1073,
+      "n": 1500,
+      "coverage": 1,
+      "adapter": "systemone",
+      "p50_ms": 1698,
+      "wall_seconds": 439.7,
+      "per_config": {
+        "calendar": {
+          "n": 300,
+          "accuracy": 0.5133,
+          "kl_from_gold": 0.7806,
+          "brier": 0.4506,
+          "ece": 0.183
+        },
+        "code_review": {
+          "n": 300,
+          "accuracy": 0.5467,
+          "kl_from_gold": 0.623,
+          "brier": 0.3598,
+          "ece": 0.1292
+        },
+        "delivery": {
+          "n": 300,
+          "accuracy": 0.53,
+          "kl_from_gold": 0.6404,
+          "brier": 0.3276,
+          "ece": 0.1843
+        },
+        "it_support": {
+          "n": 300,
+          "accuracy": 0.7333,
+          "kl_from_gold": 0.4102,
+          "brier": 0.223,
+          "ece": 0.1117
+        },
+        "spot_snake": {
+          "n": 300,
+          "accuracy": 0.5767,
+          "kl_from_gold": 0.7218,
+          "brier": 0.4413,
+          "ece": 0.0852
+        }
+      }
+    }
+  },
+  "system": {
+    "arch": "arm64",
+    "cpus": "10",
+    "engine": "llama.cpp 0.8.0-dev (build 12059, commit 1b6935b22)",
+    "lvwb": "0.1.0",
+    "os": "darwin"
+  }
+}
