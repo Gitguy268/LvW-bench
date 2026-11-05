@@ -2,8 +2,15 @@ name: Release
 on:
   push:
     tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing tag to (re)build, e.g. v0.1.0
+        required: true
 permissions:
   contents: read
+env:
+  TAG: ${{ inputs.tag || github.ref_name }}
 jobs:
   cli:
     runs-on: ubuntu-latest
@@ -11,12 +18,14 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v5
+        with:
+          ref: ${{ env.TAG }}
       - uses: actions/setup-go@v6
         with:
           go-version-file: go.mod
       - name: Build lvwb for every platform
         run: |
-          v=${GITHUB_REF_NAME#v}
+          v=${TAG#v}
           mkdir -p dist
           for t in darwin/arm64 darwin/amd64 linux/amd64 linux/arm64 windows/amd64 windows/arm64; do
             os=${t%/*}; arch=${t#*/}; ext=""; [ "$os" = windows ] && ext=.exe
@@ -30,8 +39,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1 || gh release create "$GITHUB_REF_NAME" --title "LvW-bench $GITHUB_REF_NAME" --notes-file CHANGELOG.md
-          gh release upload "$GITHUB_REF_NAME" dist/* --clobber
+          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --title "LvW-bench $TAG" --notes-file CHANGELOG.md
+          gh release upload "$TAG" dist/* --clobber
 
   app:
     needs: cli
@@ -50,6 +59,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v5
+        with:
+          ref: ${{ env.TAG }}
       - uses: actions/setup-go@v6
         with:
           go-version-file: app/go.mod
@@ -58,12 +69,14 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.1-dev
       - name: NSIS
         if: runner.os == 'Windows'
-        run: choco install nsis -y
+        run: |
+          choco install nsis -y
+          echo "C:\Program Files (x86)\NSIS" >> $env:GITHUB_PATH
       - name: Build and package
         shell: bash
         working-directory: app
         run: |
-          v=${GITHUB_REF_NAME#v}
+          v=${TAG#v}
           go install github.com/wailsapp/wails/v2/cmd/wails@v2.17.1
           mkdir -p ../dist
           case "$RUNNER_OS" in
@@ -89,7 +102,7 @@ jobs:
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release upload "$GITHUB_REF_NAME" dist/* --clobber
+        run: gh release upload "$TAG" dist/* --clobber
 
   checksums:
     needs: app
@@ -102,7 +115,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           mkdir a && cd a
-          gh release download "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --pattern '*'
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern '*'
           rm -f SHA256SUMS.txt
           sha256sum * > SHA256SUMS.txt
-          gh release upload "$GITHUB_REF_NAME" SHA256SUMS.txt --repo "$GITHUB_REPOSITORY" --clobber
+          gh release upload "$TAG" SHA256SUMS.txt --repo "$GITHUB_REPOSITORY" --clobber
