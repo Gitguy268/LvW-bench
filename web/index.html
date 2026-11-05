@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LvW-bench leaderboard</title>
+<meta name="description" content="LvW-bench: a local benchmark for tiny System 1 (decision) and System 2 (generative) models. Leaderboard, docs and an in-browser runner.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="./"><span class="dot"></span>LvW-bench</a>
+  <nav><a class="on" href="./">Leaderboard</a><a href="run.html">Run in browser</a><a href="docs.html">Docs</a>
+    <a href="https://huggingface.co/datasets/Lucasgitguy-co/LvW-bench">Dataset</a><a href="https://github.com/Gitguy268/LvW-bench">GitHub</a></nav>
+</div></header>
+<main class="wrap">
+  <h1>Tiny models, scored on your own machine</h1>
+  <p class="lede">System 1 decision models answer typed questions with probabilities. System 2 models write answers, once with
+    thinking off and once with it on. Every row was run locally with <code>lvwb</code> and is tied to the exact weights.</p>
+  <div class="row">
+    <div class="tabs" id="tracks" role="tablist">
+      <button data-t="decide" class="on">System 1 · decide</button>
+      <button data-t="answer">System 2 · answer</button>
+      <button data-t="reason">System 2 · reason</button>
+    </div>
+    <div class="tabs" id="modes">
+      <button data-m="general" class="on">Zero-shot</button>
+      <button data-m="specialist">Specialists</button>
+    </div>
+  </div>
+  <p class="note" id="explain"></p>
+  <div class="tablewrap"><table id="board"><thead></thead><tbody></tbody></table></div>
+  <p class="note" id="meta"></p>
+
+  <h2>Add your model</h2>
+  <div class="grid">
+    <div class="card"><h3>1. Install</h3><pre>brew trust gitguy268/tap
+brew install gitguy268/tap/lvw-bench</pre><p class="note">Or a release binary for macOS, Linux or Windows.</p></div>
+    <div class="card"><h3>2. Run</h3><pre>lvwb run org/your-model</pre><p class="note">HF link or id, local <code>.gguf</code>, safetensors folder or a server URL.</p></div>
+    <div class="card"><h3>3. Share</h3><pre>lvwb submit &lt;result.json&gt;</pre><p class="note">Prints the steps for a discussion on the dataset. Nothing is uploaded for you.</p></div>
+  </div>
+</main>
+<footer><div class="wrap">LvW-bench is MIT licensed. Data from GSM8K, MMLU, MMLU-Pro (MIT), TruthfulQA and IFEval (Apache-2.0) keeps its licence.
+  The System 1 scorer follows <a href="https://huggingface.co/datasets/LocalLLaMA/typed-decisions">typed-decisions</a>. Scores are generated-answer accuracy and are not comparable with lm-eval loglikelihood numbers.</div></footer>
+<script type="module" src="js/board.js"></script>
+</body>
+</html>

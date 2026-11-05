@@ -1,0 +1,15 @@
+=== smollm2-135m 19:20:22
+  decide  acc 0.282 [0.260–0.305]  KL 0.888  Brier 0.519  ECE 0.224  n=1500  adapter=logprobs  coverage 100%  p50 175 ms
+  answer  acc 0.158 [0.137–0.181]  n=1143  110 tok/answer  749 tok/s  truncated 0%  168s
+  reason  acc 0.146 [0.104–0.192]  n=240  954 tok/answer  603 tok/s  truncated 0%  380s
+/dev/disk3s1s1   460Gi    13Gi    25Gi    34%    484k  263M    0%   /
+=== spot-snake-d1-2b 19:29:54
+  decide  acc 0.535 [0.509–0.560]  KL 1.722  Brier 0.565  ECE 0.329  n=1500  adapter=systemone  coverage 100%  p50 1564 ms
+/dev/disk3s1s1   460Gi    13Gi    31Gi    30%    484k  326M    0%   /
+=== spot-snake-d1-3b 19:36:28
+  decide  acc 0.563 [0.537–0.588]  KL 2.372  Brier 0.487  ECE 0.272  n=1500  adapter=systemone  coverage 100%  p50 2172 ms
+/dev/disk3s1s1   460Gi    13Gi    30Gi    31%    484k  311M    0%   /
+=== spot-snake-minimind-jev 19:45:12
+  decide  acc 0.334 [0.309–0.359]  KL 0.709  Brier 0.429  ECE 0.102  n=1500  adapter=systemone  coverage 7%  p50 0 ms
+/dev/disk3s1s1   460Gi    13Gi    30Gi    31%    484k  311M    0%   /
+=== d1-2b 19:45:18

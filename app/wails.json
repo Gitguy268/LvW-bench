@@ -1,0 +1,19 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "LvW-bench",
+  "outputfilename": "LvW-bench",
+  "frontend:install": "",
+  "frontend:build": "",
+  "frontend:dir": "frontend",
+  "wailsjsdir": "",
+  "author": {
+    "name": "Lucas Van De Weerd"
+  },
+  "info": {
+    "companyName": "Lucas Van De Weerd",
+    "productName": "LvW-bench",
+    "productVersion": "0.1.0",
+    "copyright": "Copyright (c) 2026 Lucas Van De Weerd, MIT",
+    "comments": "A local benchmark for tiny System 1 and System 2 models"
+  }
+}

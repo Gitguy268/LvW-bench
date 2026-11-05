@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LvW-bench browser runner</title>
+<meta name="description" content="Run LvW-bench in your browser: a GGUF model through wllama (WebGPU or CPU), or a WebLLM model, scored with the same rules as lvwb.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="./"><span class="dot"></span>LvW-bench</a>
+  <nav><a href="./">Leaderboard</a><a class="on" href="run.html">Run in browser</a><a href="docs.html">Docs</a>
+    <a href="https://huggingface.co/datasets/Lucasgitguy-co/LvW-bench">Dataset</a><a href="https://github.com/Gitguy268/LvW-bench">GitHub</a></nav>
+</div></header>
+<main class="wrap">
+  <h1>Run the bench in your browser</h1>
+  <p class="lede">The model runs on this device and no data leaves it. GGUF files run through <a href="https://github.com/ngxson/wllama">wllama</a>, on WebGPU when the browser has it and on the CPU otherwise. WebLLM models need WebGPU. The rules match <code>lvwb</code>, and the result file can be submitted like a terminal run. The browser is much slower than <code>lvwb</code>, so start with the quick profile.</p>
+
+  <div class="card">
+    <div class="grid">
+      <div>
+        <label for="engine">Engine</label>
+        <select id="engine">
+          <option value="wllama">GGUF (wllama)</option>
+          <option value="webllm">WebLLM (MLC, WebGPU)</option>
+        </select>
+      </div>
+      <div id="ggufBox">
+        <label for="model">Hugging Face link or id (GGUF repo)</label>
+        <input type="text" id="model" value="bartowski/SmolLM2-135M-Instruct-GGUF" spellcheck="false">
+        <label for="file" style="margin-top:8px">or a local .gguf file</label>
+        <input type="file" id="file" accept=".gguf" multiple>
+      </div>
+      <div id="webllmBox" hidden>
+        <label for="mlc">WebLLM model</label>
+        <select id="mlc">
+          <option>Qwen3-0.6B-q4f16_1-MLC</option>
+          <option>Qwen3-1.7B-q4f16_1-MLC</option>
+          <option>SmolLM2-360M-Instruct-q4f16_1-MLC</option>
+          <option>SmolLM2-1.7B-Instruct-q4f16_1-MLC</option>
+          <option>Qwen2.5-0.5B-Instruct-q4f16_1-MLC</option>
+          <option>Llama-3.2-1B-Instruct-q4f16_1-MLC</option>
+          <option>gemma-2-2b-it-q4f16_1-MLC</option>
+        </select>
+      </div>
+      <div>
+        <label>Tracks</label>
+        <div class="row">
+          <label><input type="checkbox" class="trk" value="decide" checked> decide</label>
+          <label><input type="checkbox" class="trk" value="answer" checked> answer</label>
+          <label><input type="checkbox" class="trk" value="reason"> reason</label>
+        </div>
+        <label for="profile" style="margin-top:8px">Profile</label>
+        <select id="profile"><option value="quick">quick (50 cases, 120 items)</option><option value="standard">standard (leaderboard)</option></select>
+      </div>
+    </div>
+    <div class="row" style="margin-top:14px">
+      <button class="primary" id="go">Run</button>
+      <button class="ghost" id="stop" disabled>Stop</button>
+      <span class="note" id="gpu"></span>
+    </div>
+  </div>
+
+  <div id="out" hidden>
+    <h2 id="title"></h2>
+    <div class="grid" id="bars"></div>
+    <div class="log" id="log" style="margin-top:12px"></div>
+    <div id="summary"></div>
+    <div class="row" style="margin-top:12px" id="dl" hidden>
+      <button class="ghost" id="dlRes">Download result.json</button>
+      <button class="ghost" id="dlPred">Download predictions.jsonl</button>
+    </div>
+  </div>
+</main>
+<footer><div class="wrap">wllama (MIT) and WebLLM (Apache-2.0) are loaded from jsDelivr when you press Run. Downloaded models are cached by the browser.</div></footer>
+<script type="module" src="js/runner.js"></script>
+</body>
+</html>

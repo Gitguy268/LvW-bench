@@ -1,0 +1,11 @@
+name: Idea or new task set
+description: Suggest a feature, a workflow or a dataset
+labels: [enhancement]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: The idea
+      description: What should LvW-bench do? For a dataset, link it and give its licence.
+    validations:
+      required: true

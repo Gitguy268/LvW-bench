@@ -1,0 +1,1188 @@
+{
+ "decisions": [
+  {
+   "question": {
+    "type": "choice",
+    "instructions": "Pick",
+    "criteria": {
+     "a": "first",
+     "b": null,
+     "c": "third"
+    }
+   },
+   "pred": {
+    "a": 0.7,
+    "b": 0.2,
+    "c": 0.1
+   },
+   "gold": {
+    "a": 0.6,
+    "b": 0.3,
+    "c": 0.1
+   },
+   "want": {
+    "correct": true,
+    "kl": 0.029149124536094334,
+    "brier": 0.01999999999999999,
+    "confidence": 0.7
+   }
+  },
+  {
+   "question": {
+    "type": "choice",
+    "instructions": "Pick",
+    "criteria": {
+     "a": "first",
+     "b": null,
+     "c": "third"
+    }
+   },
+   "pred": {
+    "a": 0.1,
+    "b": 0.1,
+    "c": 0.8
+   },
+   "gold": {
+    "a": 0.9,
+    "b": 0.05,
+    "c": 0.05
+   },
+   "want": {
+    "correct": false,
+    "kl": 1.8042153244626113,
+    "brier": 1.205,
+    "confidence": 0.8
+   }
+  },
+  {
+   "question": {
+    "type": "choice",
+    "instructions": "Pick",
+    "criteria": {
+     "a": "first",
+     "b": null,
+     "c": "third"
+    }
+   },
+   "pred": {},
+   "gold": {
+    "a": 0.2,
+    "b": 0.5,
+    "c": 0.3
+   },
+   "want": {
+    "correct": false,
+    "kl": 0.06895927460353621,
+    "brier": 0.04666666666666666,
+    "confidence": 0.3333333333333333
+   }
+  },
+  {
+   "question": {
+    "type": "choice",
+    "instructions": "Pick",
+    "criteria": {
+     "a": "first",
+     "b": null,
+     "c": "third"
+    }
+   },
+   "pred": {
+    "a": 2.0,
+    "b": 2.0
+   },
+   "gold": {
+    "a": 0.5,
+    "b": 0.5,
+    "c": 0.0
+   },
+   "want": {
+    "correct": true,
+    "kl": 0.0,
+    "brier": 0.0,
+    "confidence": 0.5
+   }
+  },
+  {
+   "question": {
+    "type": "choice",
+    "instructions": "Pick",
+    "criteria": {
+     "a": "first",
+     "b": null,
+     "c": "third"
+    }
+   },
+   "pred": {
+    "b": 1.0
+   },
+   "gold": {
+    "a": 0.0,
+    "b": 1.0,
+    "c": 0.0
+   },
+   "want": {
+    "correct": true,
+    "kl": 0.0,
+    "brier": 0.0,
+    "confidence": 1.0
+   }
+  },
+  {
+   "question": {
+    "type": "score",
+    "instructions": "Level",
+    "criteria": [
+     "low",
+     "mid",
+     "high",
+     "max"
+    ]
+   },
+   "pred": {
+    "0": 0.1,
+    "1": 0.6,
+    "2": 0.2,
+    "3": 0.1
+   },
+   "gold": {
+    "0": 0.05,
+    "1": 0.75,
+    "2": 0.2,
+    "3": 0.0
+   },
+   "want": {
+    "correct": true,
+    "kl": 0.13270030445766007,
+    "brier": 0.03500000000000001,
+    "confidence": 0.6
+   }
+  },
+  {
+   "question": {
+    "type": "score",
+    "instructions": "Level",
+    "criteria": [
+     "low",
+     "mid",
+     "high",
+     "max"
+    ]
+   },
+   "pred": {
+    "3": 1.0
+   },
+   "gold": {
+    "0": 0.9,
+    "1": 0.1,
+    "2": 0.0,
+    "3": 0.0
+   },
+   "want": {
+    "correct": false,
+    "kl": 20.398182863554965,
+    "brier": 1.82,
+    "confidence": 1.0
+   }
+  },
+  {
+   "question": {
+    "type": "noul",
+    "instructions": "Is it?",
+    "criteria": {
+     "true": "yes",
+     "false": "no"
+    }
+   },
+   "pred": {
+    "yes": 0.8,
+    "no": 0.2
+   },
+   "gold": {
+    "true": 0.7,
+    "false": 0.3
+   },
+   "want": {
+    "correct": true,
+    "kl": 0.02816755759528336,
+    "brier": 0.02000000000000001,
+    "confidence": 0.8
+   }
+  },
+  {
+   "question": {
+    "type": "noul",
+    "instructions": "Is it?",
+    "criteria": {
+     "true": "yes",
+     "false": "no"
+    }
+   },
+   "pred": {
+    "true": 0.4,
+    "false": 0.6
+   },
+   "gold": {
+    "true": 0.97,
+    "false": 0.03
+   },
+   "want": {
+    "correct": false,
+    "kl": 0.7693846104511434,
+    "brier": 0.6497999999999999,
+    "confidence": 0.6
+   }
+  },
+  {
+   "question": {
+    "type": "noul",
+    "instructions": "Is it?",
+    "criteria": {
+     "true": "yes",
+     "false": "no"
+    }
+   },
+   "pred": {
+    "True": 0.55,
+    "False": 0.45
+   },
+   "gold": {
+    "true": 0.5,
+    "false": 0.5
+   },
+   "want": {
+    "correct": true,
+    "kl": 0.005025167926750729,
+    "brier": 0.005000000000000003,
+    "confidence": 0.55
+   }
+  }
+ ],
+ "summary": {
+  "want": {
+   "n_decisions": 10,
+   "accuracy": 0.6,
+   "kl_from_gold": 2.3235784227588043,
+   "brier": 0.3801466666666667,
+   "ece": 0.3383333333333334
+  }
+ },
+ "gen": [
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [
+     "Paris",
+     "Rome",
+     "Oslo",
+     "Lima"
+    ],
+    "answer": "B",
+    "answer_type": "mc",
+    "meta": {},
+    "source": "",
+    "license": ""
+   },
+   "output": "B",
+   "want": {
+    "correct": true,
+    "extracted": "B"
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [
+     "Paris",
+     "Rome",
+     "Oslo",
+     "Lima"
+    ],
+    "answer": "B",
+    "answer_type": "mc",
+    "meta": {},
+    "source": "",
+    "license": ""
+   },
+   "output": "The answer is (B).",
+   "want": {
+    "correct": true,
+    "extracted": "B"
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [
+     "Paris",
+     "Rome",
+     "Oslo",
+     "Lima"
+    ],
+    "answer": "B",
+    "answer_type": "mc",
+    "meta": {},
+    "source": "",
+    "license": ""
+   },
+   "output": "<think>maybe A? no.</think>\nAnswer: B",
+   "want": {
+    "correct": true,
+    "extracted": "B"
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [
+     "Paris",
+     "Rome",
+     "Oslo",
+     "Lima"
+    ],
+    "answer": "B",
+    "answer_type": "mc",
+    "meta": {},
+    "source": "",
+    "license": ""
+   },
+   "output": "<think>A or B, I am still thinking",
+   "want": {
+    "correct": false,
+    "extracted": ""
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [
+     "Paris",
+     "Rome",
+     "Oslo",
+     "Lima"
+    ],
+    "answer": "C",
+    "answer_type": "mc",
+    "meta": {},
+    "source": "",
+    "license": ""
+   },
+   "output": "It is Oslo.",
+   "want": {
+    "correct": true,
+    "extracted": "C"
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [
+     "Paris",
+     "Rome",
+     "Oslo",
+     "Lima"
+    ],
+    "answer": "C",
+    "answer_type": "mc",
+    "meta": {},
+    "source": "",
+    "license": ""
+   },
+   "output": "Paris or Oslo",
+   "want": {
+    "correct": false,
+    "extracted": ""
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [
+     "Paris",
+     "Rome",
+     "Oslo",
+     "Lima"
+    ],
+    "answer": "A",
+    "answer_type": "mc",
+    "meta": {},
+    "source": "",
+    "license": ""
+   },
+   "output": "**A**",
+   "want": {
+    "correct": true,
+    "extracted": "A"
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [
+     "Paris",
+     "Rome",
+     "Oslo",
+     "Lima"
+    ],
+    "answer": "B",
+    "answer_type": "mc",
+    "meta": {},
+    "source": "",
+    "license": ""
+   },
+   "output": "E",
+   "want": {
+    "correct": false,
+    "extracted": ""
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [
+     "Paris",
+     "Rome",
+     "Oslo",
+     "Lima"
+    ],
+    "answer": "A",
+    "answer_type": "mc",
+    "meta": {},
+    "source": "",
+    "license": ""
+   },
+   "output": "A capital city of France is Paris.",
+   "want": {
+    "correct": true,
+    "extracted": "A"
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [
+     "Paris",
+     "Rome",
+     "Oslo",
+     "Lima"
+    ],
+    "answer": "B",
+    "answer_type": "mc",
+    "meta": {},
+    "source": "",
+    "license": ""
+   },
+   "output": "A city in Italy",
+   "want": {
+    "correct": false,
+    "extracted": ""
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [
+     "Paris",
+     "Rome",
+     "Oslo",
+     "Lima"
+    ],
+    "answer": "D",
+    "answer_type": "mc",
+    "meta": {},
+    "source": "",
+    "license": ""
+   },
+   "output": "D) Lima",
+   "want": {
+    "correct": true,
+    "extracted": "D"
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [],
+    "answer": "72",
+    "answer_type": "number",
+    "meta": {},
+    "source": "",
+    "license": ""
+   },
+   "output": "She has 72 apples in total.",
+   "want": {
+    "correct": true,
+    "extracted": "72"
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [],
+    "answer": "1234",
+    "answer_type": "number",
+    "meta": {},
+    "source": "",
+    "license": ""
+   },
+   "output": "So 1,000 + 234.\nAnswer: 1,234",
+   "want": {
+    "correct": true,
+    "extracted": "1234"
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [],
+    "answer": "18",
+    "answer_type": "number",
+    "meta": {},
+    "source": "",
+    "license": ""
+   },
+   "output": "Answer: $18.00",
+   "want": {
+    "correct": true,
+    "extracted": "18"
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [],
+    "answer": "-5",
+    "answer_type": "number",
+    "meta": {},
+    "source": "",
+    "license": ""
+   },
+   "output": "The result is -5",
+   "want": {
+    "correct": true,
+    "extracted": "-5"
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [],
+    "answer": "7",
+    "answer_type": "number",
+    "meta": {},
+    "source": "",
+    "license": ""
+   },
+   "output": "I think 8",
+   "want": {
+    "correct": false,
+    "extracted": "8"
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [],
+    "answer": "Thursday",
+    "answer_type": "exact",
+    "meta": {},
+    "source": "",
+    "license": ""
+   },
+   "output": "Answer: thursday.",
+   "want": {
+    "correct": true,
+    "extracted": "thursday"
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [],
+    "answer": "anchor, maple, violet",
+    "answer_type": "exact",
+    "meta": {},
+    "source": "",
+    "license": ""
+   },
+   "output": "anchor,maple ,violet",
+   "want": {
+    "correct": true,
+    "extracted": "anchor, maple, violet"
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [],
+    "answer": "2026-03-04",
+    "answer_type": "exact",
+    "meta": {},
+    "source": "",
+    "license": ""
+   },
+   "output": "Let me count.\nAnswer: 2026-03-05",
+   "want": {
+    "correct": false,
+    "extracted": "2026-03-05"
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [],
+    "answer": "",
+    "answer_type": "json",
+    "meta": {
+     "values": {
+      "name": "Ada",
+      "age": 36
+     }
+    },
+    "source": "",
+    "license": ""
+   },
+   "output": "```json\n{\"name\": \"Ada\", \"age\": 36}\n```",
+   "want": {
+    "correct": true,
+    "extracted": ""
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [],
+    "answer": "",
+    "answer_type": "json",
+    "meta": {
+     "values": {
+      "name": "Ada",
+      "age": 36
+     }
+    },
+    "source": "",
+    "license": ""
+   },
+   "output": "Sure! {\"name\":\"ada\",\"age\":36.0,\"x\":1}",
+   "want": {
+    "correct": true,
+    "extracted": ""
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [],
+    "answer": "",
+    "answer_type": "json",
+    "meta": {
+     "values": {
+      "name": "Ada",
+      "age": 36
+     }
+    },
+    "source": "",
+    "license": ""
+   },
+   "output": "{\"name\": \"Ada\"}",
+   "want": {
+    "correct": false,
+    "extracted": ""
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [],
+    "answer": "",
+    "answer_type": "mermaid",
+    "meta": {
+     "edges": [
+      [
+       "Start",
+       "Boil water"
+      ],
+      [
+       "Boil water",
+       "Done"
+      ]
+     ]
+    },
+    "source": "",
+    "license": ""
+   },
+   "output": "```mermaid\nflowchart TD\n  A[Start] --> B[Boil water]\n  B --> C[Done]\n```",
+   "want": {
+    "correct": true,
+    "extracted": ""
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [],
+    "answer": "",
+    "answer_type": "mermaid",
+    "meta": {
+     "edges": [
+      [
+       "Start",
+       "Done"
+      ]
+     ]
+    },
+    "source": "",
+    "license": ""
+   },
+   "output": "graph LR\nStart --> Done",
+   "want": {
+    "correct": true,
+    "extracted": ""
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [],
+    "answer": "",
+    "answer_type": "mermaid",
+    "meta": {
+     "edges": [
+      [
+       "Start",
+       "Done"
+      ]
+     ]
+    },
+    "source": "",
+    "license": ""
+   },
+   "output": "A[Start] --> B[Done]",
+   "want": {
+    "correct": false,
+    "extracted": ""
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [],
+    "answer": "",
+    "answer_type": "ifeval",
+    "meta": {
+     "instruction_id_list": [
+      "punctuation:no_comma",
+      "change_case:english_lowercase"
+     ],
+     "kwargs": [
+      {},
+      {}
+     ]
+    },
+    "source": "",
+    "license": ""
+   },
+   "output": "all lower case and no commas here",
+   "want": {
+    "correct": true,
+    "extracted": ""
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [],
+    "answer": "",
+    "answer_type": "ifeval",
+    "meta": {
+     "instruction_id_list": [
+      "punctuation:no_comma"
+     ],
+     "kwargs": [
+      {}
+     ]
+    },
+    "source": "",
+    "license": ""
+   },
+   "output": "one, two",
+   "want": {
+    "correct": false,
+    "extracted": ""
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [],
+    "answer": "",
+    "answer_type": "ifeval",
+    "meta": {
+     "instruction_id_list": [
+      "length_constraints:number_words"
+     ],
+     "kwargs": [
+      {
+       "relation": "at least",
+       "num_words": 5
+      }
+     ]
+    },
+    "source": "",
+    "license": ""
+   },
+   "output": "one two three four five",
+   "want": {
+    "correct": true,
+    "extracted": ""
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [],
+    "answer": "",
+    "answer_type": "ifeval",
+    "meta": {
+     "instruction_id_list": [
+      "length_constraints:number_words"
+     ],
+     "kwargs": [
+      {
+       "relation": "less than",
+       "num_words": 3
+      }
+     ]
+    },
+    "source": "",
+    "license": ""
+   },
+   "output": "one two three",
+   "want": {
+    "correct": false,
+    "extracted": ""
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [],
+    "answer": "",
+    "answer_type": "ifeval",
+    "meta": {
+     "instruction_id_list": [
+      "detectable_format:number_bullet_lists"
+     ],
+     "kwargs": [
+      {
+       "num_bullets": 2
+      }
+     ]
+    },
+    "source": "",
+    "license": ""
+   },
+   "output": "Intro\n* first\n- second",
+   "want": {
+    "correct": true,
+    "extracted": ""
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [],
+    "answer": "",
+    "answer_type": "ifeval",
+    "meta": {
+     "instruction_id_list": [
+      "detectable_format:title",
+      "detectable_content:postscript"
+     ],
+     "kwargs": [
+      {},
+      {
+       "postscript_marker": "P.S."
+      }
+     ]
+    },
+    "source": "",
+    "license": ""
+   },
+   "output": "<<My Title>>\nBody text.\nP.S. bye",
+   "want": {
+    "correct": true,
+    "extracted": ""
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [],
+    "answer": "",
+    "answer_type": "ifeval",
+    "meta": {
+     "instruction_id_list": [
+      "detectable_format:number_highlighted_sections"
+     ],
+     "kwargs": [
+      {
+       "num_highlights": 2
+      }
+     ]
+    },
+    "source": "",
+    "license": ""
+   },
+   "output": "*one* and **two**",
+   "want": {
+    "correct": true,
+    "extracted": ""
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [],
+    "answer": "",
+    "answer_type": "ifeval",
+    "meta": {
+     "instruction_id_list": [
+      "keywords:existence",
+      "keywords:forbidden_words"
+     ],
+     "kwargs": [
+      {
+       "keywords": [
+        "Spot"
+       ]
+      },
+      {
+       "forbidden_words": [
+        "cat"
+       ]
+      }
+     ]
+    },
+    "source": "",
+    "license": ""
+   },
+   "output": "spot is a dog, catalogue is fine",
+   "want": {
+    "correct": true,
+    "extracted": ""
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [],
+    "answer": "",
+    "answer_type": "ifeval",
+    "meta": {
+     "instruction_id_list": [
+      "keywords:frequency",
+      "keywords:letter_frequency"
+     ],
+     "kwargs": [
+      {
+       "keyword": "dog",
+       "frequency": 2,
+       "relation": "at least"
+      },
+      {
+       "letter": "z",
+       "let_frequency": 1,
+       "let_relation": "less than"
+      }
+     ]
+    },
+    "source": "",
+    "license": ""
+   },
+   "output": "Dog dog dog",
+   "want": {
+    "correct": true,
+    "extracted": ""
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [],
+    "answer": "",
+    "answer_type": "ifeval",
+    "meta": {
+     "instruction_id_list": [
+      "length_constraints:number_paragraphs"
+     ],
+     "kwargs": [
+      {
+       "num_paragraphs": 2
+      }
+     ]
+    },
+    "source": "",
+    "license": ""
+   },
+   "output": "First part.\n***\nSecond part.",
+   "want": {
+    "correct": true,
+    "extracted": ""
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [],
+    "answer": "",
+    "answer_type": "ifeval",
+    "meta": {
+     "instruction_id_list": [
+      "detectable_format:json_format",
+      "startend:end_checker"
+     ],
+     "kwargs": [
+      {},
+      {
+       "end_phrase": "}"
+      }
+     ]
+    },
+    "source": "",
+    "license": ""
+   },
+   "output": "```json\n{\"a\": 1}\n```",
+   "want": {
+    "correct": false,
+    "extracted": ""
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [],
+    "answer": "",
+    "answer_type": "ifeval",
+    "meta": {
+     "instruction_id_list": [
+      "startend:quotation",
+      "change_case:english_capital"
+     ],
+     "kwargs": [
+      {},
+      {}
+     ]
+    },
+    "source": "",
+    "license": ""
+   },
+   "output": "\"ALL CAPS HERE\"",
+   "want": {
+    "correct": true,
+    "extracted": ""
+   }
+  },
+  {
+   "item": {
+    "id": "x",
+    "config": "t",
+    "prompt": "q",
+    "choices": [],
+    "answer": "",
+    "answer_type": "ifeval",
+    "meta": {
+     "instruction_id_list": [
+      "detectable_content:number_placeholders"
+     ],
+     "kwargs": [
+      {
+       "num_placeholders": 2
+      }
+     ]
+    },
+    "source": "",
+    "license": ""
+   },
+   "output": "Dear [name], at [address]",
+   "want": {
+    "correct": true,
+    "extracted": ""
+   }
+  }
+ ]
+}

@@ -1,0 +1,23 @@
+name: Bug report
+description: Something does not work
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: The command you ran, what you expected and what you got (paste the error).
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: lvwb version and OS
+      placeholder: "lvwb 0.1.0, macOS 26 arm64, llama.cpp 0.9.0"
+    validations:
+      required: true
+  - type: input
+    id: model
+    attributes:
+      label: Model
+      placeholder: "HF id or file name"

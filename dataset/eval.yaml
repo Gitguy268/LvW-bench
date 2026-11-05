@@ -1,0 +1,33 @@
+name: LvW-bench
+description: >
+  A local benchmark for tiny models. System 1: typed decisions (choice, score, noul)
+  answered as probability distributions and scored on accuracy, KL from gold, Brier and ECE.
+  System 2: generated answers on permissive subsets of GSM8K, MMLU, MMLU-Pro, TruthfulQA and
+  IFEval plus a seeded generated set, once with thinking off (answer) and once with thinking
+  on (reason).
+
+leaderboard:
+  base_models_only: false
+
+tasks:
+  - id: decide_accuracy
+    config: decide_all
+    split: test
+  - id: decide_kl
+    config: decide_all
+    split: test
+    lower_is_better: true
+  - id: decide_brier
+    config: decide_all
+    split: test
+    lower_is_better: true
+  - id: decide_ece
+    config: decide_all
+    split: test
+    lower_is_better: true
+  - id: answer_accuracy
+    config: generative_all
+    split: test
+  - id: reason_accuracy
+    config: reason_subset
+    split: test

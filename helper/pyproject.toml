@@ -1,0 +1,18 @@
+[project]
+name = "lvw-bench-helper"
+version = "0.1.0"
+description = "Serves safetensors models to LvW-bench over a local OpenAI-compatible API"
+license = "MIT"
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "torch>=2.4",
+    "transformers>=4.57",
+    "accelerate>=1.0",
+    "safetensors>=0.4",
+    "huggingface_hub>=0.30",
+    "peft>=0.13",
+    "sentence-transformers>=3.0",
+]
+
+[tool.uv]
+package = false

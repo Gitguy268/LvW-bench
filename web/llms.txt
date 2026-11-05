@@ -1,0 +1,9 @@
+# LvW-bench
+
+> A local benchmark for tiny models. System 1: typed decisions scored on probabilities (accuracy, KL, Brier, ECE). System 2: generated answers with thinking off (answer) and on (reason). Runs from the terminal (lvwb), a desktop app or the browser.
+
+- [Leaderboard](https://gitguy268.github.io/LvW-bench/)
+- [Docs](https://gitguy268.github.io/LvW-bench/docs.html)
+- [Browser runner](https://gitguy268.github.io/LvW-bench/run.html)
+- [Dataset](https://huggingface.co/datasets/Lucasgitguy-co/LvW-bench)
+- [Source](https://github.com/Gitguy268/LvW-bench)

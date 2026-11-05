@@ -1,0 +1,10 @@
+/.bin/
+/dist/
+/app/build/bin/
+/seed/logs/
+/web/data/
+*.incomplete
+.DS_Store
+__pycache__/
+node_modules/
+.env

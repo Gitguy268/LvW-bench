@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LvW-bench docs</title>
+<meta name="description" content="How to install and run LvW-bench: Homebrew, release binaries, the desktop app, model inputs, tracks, profiles and scoring.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/site.css">
+<style>main { max-width: 860px; } td, th { white-space: normal; }</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="./"><span class="dot"></span>LvW-bench</a>
+  <nav><a href="./">Leaderboard</a><a href="run.html">Run in browser</a><a class="on" href="docs.html">Docs</a>
+    <a href="https://huggingface.co/datasets/Lucasgitguy-co/LvW-bench">Dataset</a><a href="https://github.com/Gitguy268/LvW-bench">GitHub</a></nav>
+</div></header>
+<main class="wrap">
+  <h1>Docs</h1>
+  <p class="lede">LvW-bench runs fully on your machine. Pick a model, it downloads what it needs from Hugging Face, starts a local server, scores three tracks and saves a result file tied to the exact weights.</p>
+
+  <h2>Install</h2>
+  <h3>Terminal: macOS and Linux (Homebrew)</h3>
+  <pre>brew trust gitguy268/tap
+brew install gitguy268/tap/lvw-bench     # the lvwb command
+brew install llama.cpp uv                 # engines: GGUF and safetensors</pre>
+  <h3>Desktop app</h3>
+  <pre>brew install --cask gitguy268/tap/lvw-bench-app   # macOS</pre>
+  <p>For Linux (AppImage, .deb) and Windows (installer), download the files from the <a href="https://github.com/Gitguy268/LvW-bench/releases">releases page</a>. The app uses the same engines, so install llama.cpp and uv as well.</p>
+  <h3>From source</h3>
+  <pre>git clone https://github.com/Gitguy268/LvW-bench && cd LvW-bench
+go build -o lvwb ./cmd/lvwb</pre>
+
+  <h2>Run</h2>
+  <pre>lvwb run Lucasgitguy-co/spot-snake-d1-2B-v0.1          # HF id: picks the GGUF, Q4_K_M by default
+lvwb run https://huggingface.co/unsloth/Qwen3-0.6B-GGUF  # HF link
+lvwb run ~/models/model-Q4_K_M.gguf                      # local GGUF
+lvwb run ~/models/my-model/                              # local safetensors folder
+lvwb run Lucasgitguy-co/minimind-mermaid-run2 --subfolder ep3
+lvwb run http://127.0.0.1:8080/v1 --backend openai --server-model my-model
+lvwb run llama3.2:1b --backend ollama
+lvwb tui                                                 # terminal UI with presets</pre>
+  <table>
+    <thead><tr><th>Flag</th><th>What it does</th></tr></thead>
+    <tbody>
+      <tr><td><code>--track decide,answer,reason</code></td><td>Which tracks to run (default: all that the model supports)</td></tr>
+      <tr><td><code>--profile quick|standard|full</code></td><td><code>quick</code> is a smoke test, <code>standard</code> is what the leaderboard uses, <code>full</code> runs everything</td></tr>
+      <tr><td><code>--quant Q8_0</code>, <code>--file x.gguf</code></td><td>Pick a GGUF in a repo that has several</td></tr>
+      <tr><td><code>--format safetensors</code></td><td>Use the safetensors weights when a repo has both</td></tr>
+      <tr><td><code>--subfolder</code>, <code>--revision</code></td><td>Weights in a subfolder, or a branch, tag, commit or <code>refs/pr/N</code></td></tr>
+      <tr><td><code>--trust-remote-code</code></td><td>Allow custom model code from the repo (safetensors only)</td></tr>
+      <tr><td><code>--seed N</code></td><td>A fresh generated set that no model can have memorised</td></tr>
+      <tr><td><code>--reason-budget 2048</code></td><td>Output tokens for the reason track</td></tr>
+      <tr><td><code>--mode specialist</code></td><td>Mark a model that was trained on the <code>train</code> split or the same task</td></tr>
+      <tr><td><code>--cpu</code>, <code>--parallel 4</code></td><td>No GPU offload, requests in flight</td></tr>
+    </tbody>
+  </table>
+  <p>Results go to the lvw-bench cache folder (<code>--out</code> to change it). <code>lvwb results</code>, <code>lvwb leaderboard</code>, <code>lvwb compare a.json b.json</code>, <code>lvwb export --md|--csv|--eval-results</code> and <code>lvwb rescore</code> work on them.</p>
+
+  <h2>Tracks</h2>
+  <div class="grid">
+    <div class="card"><h3>System 1 · decide</h3><p>Five workflows with typed questions: <code>choice</code>, <code>score</code> and <code>noul</code>. A decision model answers through <code>/v1/systemone</code>; a text model answers through the probabilities of its first token. Scored on accuracy, KL from gold, Brier and ECE, like <a href="https://huggingface.co/datasets/LocalLLaMA/typed-decisions">typed-decisions</a>.</p></div>
+    <div class="card"><h3>System 2 · answer</h3><p>Thinking off. Short answers get 32 tokens, and free-form ones (IFEval, JSON, Mermaid) get 768. Uses GSM8K, MMLU, MMLU-Pro, TruthfulQA, IFEval and a generated set.</p></div>
+    <div class="card"><h3>System 2 · reason</h3><p>Thinking on: native <code>&lt;think&gt;</code> when the template has it, step by step otherwise. 2,048-token budget. Only the final answer is scored, and a think block that never closes counts as wrong.</p></div>
+  </div>
+
+  <h2>Engines</h2>
+  <table>
+    <thead><tr><th>Input</th><th>Engine</th><th>Needs</th></tr></thead>
+    <tbody>
+      <tr><td>GGUF (HF or local)</td><td><code>llama-server</code> on a loopback port, GPU offload on</td><td>llama.cpp 0.9.0 or later (decision models need <code>/v1/systemone</code>)</td></tr>
+      <tr><td>safetensors (HF or local), PEFT adapters</td><td>A small Python helper on transformers, run with <code>uv</code> on Python 3.12</td><td>uv; the first run installs PyTorch in a cached environment</td></tr>
+      <tr><td>Server URL, Ollama</td><td>Your server, OpenAI-compatible</td><td>Logprobs for System 1, or a sampling fallback</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Scoring notes</h2>
+  <details><summary>Why these scores differ from lm-eval</summary>
+  <p>lm-eval's multiple-choice tasks compare the probabilities of the options and never let the model write. LvW-bench lets the model answer and then extracts the answer: the <code>Answer:</code> line, the leading letter, or the last number. That is closer to how a small model gets used, but the numbers are not comparable with <code>acc_norm</code> from lm-eval or TPN.</p></details>
+  <details><summary>How the System 1 gold is made</summary>
+  <p>Each case is generated from sampled facts, and its gold comes from fixed rules. A fact the state shows directly gets a sharp gold. A judgement call keeps a soft gold. No teacher model is involved. Train and test come from different seeds and never share a state.</p></details>
+  <details><summary>Reproducing a score</summary>
+  <p>Every result has a <code>.predictions.jsonl</code> next to it. <code>lvwb rescore</code> or <code>python bench/score.py</code> scores it again without the model. Go, Python and the browser share one set of golden tests.</p></details>
+</main>
+<footer><div class="wrap">MIT · <a href="https://github.com/Gitguy268/LvW-bench/blob/main/NOTICE">NOTICE</a> lists data sources and credits.</div></footer>
+</body>
+</html>

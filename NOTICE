@@ -1,0 +1,53 @@
+LvW-bench
+Copyright (c) 2026 Lucas Van De Weerd. MIT licence (LICENSE), except where stated below.
+
+Included data (each item keeps its own licence; the `license` column says which applies)
+-----------------------------------------------------------------------------------------
+- GSM8K (openai/gsm8k), 200 test problems. MIT, Copyright (c) 2021 OpenAI.
+  https://huggingface.co/datasets/openai/gsm8k
+- MMLU (cais/mmlu), 228 test questions. MIT, Copyright (c) 2020 Dan Hendrycks et al.
+  https://huggingface.co/datasets/cais/mmlu
+- MMLU-Pro (TIGER-Lab/MMLU-Pro), 140 test questions. MIT, Copyright (c) 2024 TIGER-Lab.
+  https://huggingface.co/datasets/TIGER-Lab/MMLU-Pro
+- TruthfulQA (truthfulqa/truthful_qa, multiple_choice mc1), 150 questions, options
+  reordered. Apache-2.0 (licenses/Apache-2.0.txt), Stephanie Lin, Jacob Hilton, Owain Evans.
+  https://huggingface.co/datasets/truthfulqa/truthful_qa
+- IFEval (google/IFEval), 200 prompts whose instructions LvW-bench can verify.
+  Apache-2.0 (licenses/Apache-2.0.txt), Google LLC.
+  https://huggingface.co/datasets/google/IFEval
+The MIT terms that apply to the MIT sources are the same as in LICENSE, with the copyright
+lines above. Left out on purpose: AI2 ARC (CC-BY-SA-4.0, share-alike) and HellaSwag (no
+licence on its dataset card).
+
+Code adapted from other projects
+--------------------------------
+- The System One scorer (accuracy, KL from gold, Brier, ECE) follows
+  bench/score_with_jobs.py of LocalLLaMA/typed-decisions (Apache-2.0). The typed question
+  shape (choice, score, noul) follows the TypeSafe System One API as served by llama.cpp's
+  /v1/systemone. LvW-bench is not affiliated with TypeSafe, LocalLLaMA or Liquid AI.
+  https://huggingface.co/datasets/LocalLLaMA/typed-decisions
+- The IFEval checks in internal/score/ifeval.go, web/js/score.js and bench/score.py are
+  rewritten from google-research/instruction_following_eval (Apache-2.0), for the
+  instructions listed there. Keywords are matched literally.
+  https://github.com/google-research/google-research/tree/master/instruction_following_eval
+- The spot_snake workflow reproduces the text format and teacher of
+  Lucasgitguy-co/spot-snake-decisions-v0.1 and github.com/Gitguy268/spot-snake (MIT).
+
+Runtime dependencies (not included in the data)
+-----------------------------------------------
+- Go: charmbracelet/bubbletea, bubbles, lipgloss (MIT); wailsapp/wails v2 (MIT) for the app.
+- llama.cpp (MIT) is called as a separate program (llama-server); it is not bundled.
+- Python helper: PyTorch (BSD-3-Clause), transformers, accelerate, peft, huggingface_hub
+  (Apache-2.0), safetensors (Apache-2.0), sentence-transformers (Apache-2.0). Installed by
+  uv at run time, not bundled.
+- Browser runner: wllama (MIT), WebLLM (Apache-2.0), loaded from a CDN at run time.
+
+Ideas, no code
+--------------
+- TPN Workbench (bench.trueperformancenetwork.com): results tied to the exact weights,
+  safetensors and GGUF inputs, rotating private sets (here: the seeded generated set).
+- EleutherAI lm-evaluation-harness: task selection. Scoring here is on generated answers,
+  so scores are not comparable with lm-eval loglikelihood numbers.
+
+Models are not part of LvW-bench. Each model keeps its own licence (for example the Spot
+Snake d1 models are LvW-license-Snake-1.0, derived from the LFM Open License v1.0).

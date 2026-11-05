@@ -1,0 +1,108 @@
+name: Release
+on:
+  push:
+    tags: ["v*"]
+permissions:
+  contents: read
+jobs:
+  cli:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+      - name: Build lvwb for every platform
+        run: |
+          v=${GITHUB_REF_NAME#v}
+          mkdir -p dist
+          for t in darwin/arm64 darwin/amd64 linux/amd64 linux/arm64 windows/amd64 windows/arm64; do
+            os=${t%/*}; arch=${t#*/}; ext=""; [ "$os" = windows ] && ext=.exe
+            name=lvwb-$v-$os-$arch
+            mkdir -p "build/$name"
+            CGO_ENABLED=0 GOOS=$os GOARCH=$arch go build -trimpath -ldflags "-s -w -X main.version=$v" -o "build/$name/lvwb$ext" ./cmd/lvwb
+            cp LICENSE NOTICE README.md "build/$name/"
+            if [ "$os" = windows ]; then (cd build && zip -qr "../dist/$name.zip" "$name"); else tar -C build -czf "dist/$name.tar.gz" "$name"; fi
+          done
+      - name: Upload
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1 || gh release create "$GITHUB_REF_NAME" --title "LvW-bench $GITHUB_REF_NAME" --notes-file CHANGELOG.md
+          gh release upload "$GITHUB_REF_NAME" dist/* --clobber
+
+  app:
+    needs: cli
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            platform: darwin/universal
+          - os: windows-latest
+            platform: windows/amd64
+          - os: ubuntu-latest
+            platform: linux/amd64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+      - name: Linux libraries
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.1-dev
+      - name: NSIS
+        if: runner.os == 'Windows'
+        run: choco install nsis -y
+      - name: Build and package
+        shell: bash
+        working-directory: app
+        run: |
+          v=${GITHUB_REF_NAME#v}
+          go install github.com/wailsapp/wails/v2/cmd/wails@v2.17.1
+          mkdir -p ../dist
+          case "$RUNNER_OS" in
+            macOS)
+              wails build -platform darwin/universal -s -trimpath -ldflags "-X main.version=$v"
+              (cd build/bin && ditto -c -k --keepParent LvW-bench.app "../../../dist/LvW-bench-$v-macos-universal.zip") ;;
+            Windows)
+              wails build -platform windows/amd64 -s -trimpath -nsis -ldflags "-X main.version=$v"
+              cp build/bin/*installer*.exe "../dist/LvW-bench-$v-windows-amd64-setup.exe"
+              (cd build/bin && 7z a "../../../dist/LvW-bench-$v-windows-amd64.zip" LvW-bench.exe >/dev/null) ;;
+            Linux)
+              wails build -platform linux/amd64 -tags webkit2_41 -s -trimpath -ldflags "-X main.version=$v"
+              pkg=lvw-bench-app_${v}_amd64
+              mkdir -p "$pkg/DEBIAN" "$pkg/usr/bin" "$pkg/usr/share/applications" "$pkg/usr/share/icons/hicolor/512x512/apps"
+              cp build/bin/LvW-bench "$pkg/usr/bin/lvw-bench-app"
+              cp build/appicon.png "$pkg/usr/share/icons/hicolor/512x512/apps/lvw-bench.png"
+              printf '[Desktop Entry]\nName=LvW-bench\nComment=Local benchmark for tiny AI models\nExec=lvw-bench-app\nIcon=lvw-bench\nType=Application\nCategories=Development;Science;\n' > "$pkg/usr/share/applications/lvw-bench.desktop"
+              printf 'Package: lvw-bench-app\nVersion: %s\nArchitecture: amd64\nMaintainer: Lucas Van De Weerd <noreply@github.com>\nDepends: libgtk-3-0, libwebkit2gtk-4.1-0\nRecommends: llama.cpp\nDescription: LvW-bench desktop app\n Local benchmark for tiny System 1 and System 2 models.\n' "$v" > "$pkg/DEBIAN/control"
+              dpkg-deb --build --root-owner-group "$pkg" "../dist/$pkg.deb"
+              tar -C build/bin -czf "../dist/LvW-bench-$v-linux-amd64.tar.gz" LvW-bench ;;
+          esac
+      - name: Upload
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$GITHUB_REF_NAME" dist/* --clobber
+
+  checksums:
+    needs: app
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: SHA-256 of every asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir a && cd a
+          gh release download "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --pattern '*'
+          rm -f SHA256SUMS.txt
+          sha256sum * > SHA256SUMS.txt
+          gh release upload "$GITHUB_REF_NAME" SHA256SUMS.txt --repo "$GITHUB_REPOSITORY" --clobber

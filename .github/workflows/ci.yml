@@ -1,0 +1,98 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Go vet and tests
+        run: |
+          go vet ./...
+          go test ./...
+      - name: Build lvwb and run its self-test
+        run: |
+          go build -o lvwb${{ runner.os == 'Windows' && '.exe' || '' }} ./cmd/lvwb
+          ./lvwb selftest
+      - name: JS scorer matches the golden file
+        run: node web/test/golden.test.mjs
+      - name: Python scorer matches the golden file
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          python testdata/make_golden.py
+          git diff --exit-code internal/score/golden.json
+
+  e2e:
+    needs: test
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+      - name: Install llama.cpp
+        run: |
+          eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv 2>/dev/null || /opt/homebrew/bin/brew shellenv)"
+          brew install llama.cpp
+          echo "LVWB_LLAMA_SERVER=$(brew --prefix)/bin/llama-server" >> "$GITHUB_ENV"
+      - name: Quick run on SmolLM2-135M (GGUF from Hugging Face)
+        run: |
+          go build -o lvwb ./cmd/lvwb
+          ./lvwb run bartowski/SmolLM2-135M-Instruct-GGUF --profile quick --limit 3 --cpu --out out
+          ./lvwb results out
+          for f in out/*.predictions.jsonl; do ./lvwb rescore "$f"; done
+
+  app:
+    needs: test
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            platform: darwin/universal
+          - os: windows-latest
+            platform: windows/amd64
+          - os: ubuntu-latest
+            platform: linux/amd64
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+      - name: Linux libraries
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.1-dev
+      - name: Build the app
+        shell: bash
+        run: |
+          go install github.com/wailsapp/wails/v2/cmd/wails@v2.17.1
+          tags=""
+          if [ "$RUNNER_OS" = "Linux" ]; then tags="-tags webkit2_41"; fi
+          wails build -platform ${{ matrix.platform }} $tags -s -trimpath
+          ls -R build/bin | head

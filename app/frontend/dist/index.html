@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LvW-bench</title>
+<link rel="stylesheet" href="site.css">
+<style>
+  body { user-select: none; }
+  .app { display: grid; grid-template-columns: 340px 1fr; gap: 16px; padding: 16px; height: 100vh; }
+  .side { overflow-y: auto; }
+  .main { overflow-y: auto; }
+  .presets { max-height: 260px; overflow-y: auto; border: 1px solid var(--line); border-radius: 8px; margin-top: 6px; }
+  .presets div { padding: 6px 10px; cursor: pointer; border-bottom: 1px solid var(--line); font-size: 13px; }
+  .presets div:last-child { border-bottom: 0; }
+  .presets div:hover, .presets div.on { background: var(--chip); }
+  .presets small { display: block; color: var(--muted); }
+  .eng { font-size: 12px; margin-top: 10px; }
+  .eng b { font-weight: 600; }
+  .ok { color: var(--good); } .missing { color: var(--bad); }
+  @media (max-width: 860px) { .app { grid-template-columns: 1fr; height: auto; } }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side card">
+    <div class="brand"><span class="dot"></span>LvW-bench <span class="chip" id="ver"></span></div>
+    <label for="model" style="margin-top:14px">Model</label>
+    <input type="text" id="model" placeholder="HF link or id, .gguf path, safetensors folder, server URL" spellcheck="false">
+    <div class="row" style="margin-top:6px"><button class="ghost" id="pickFile">.gguf file…</button><span class="note">or pick a preset:</span></div>
+    <div class="presets" id="presets"></div>
+    <label style="margin-top:12px">Tracks</label>
+    <div class="row">
+      <label><input type="checkbox" class="trk" value="decide" checked> decide</label>
+      <label><input type="checkbox" class="trk" value="answer" checked> answer</label>
+      <label><input type="checkbox" class="trk" value="reason" checked> reason</label>
+    </div>
+    <div class="grid" style="grid-template-columns:1fr 1fr;margin-top:8px">
+      <div><label for="profile">Profile</label><select id="profile"><option>quick</option><option selected>standard</option><option>full</option></select></div>
+      <div><label for="mode">Mode</label><select id="mode"><option value="general">general</option><option value="specialist">specialist</option></select></div>
+      <div><label for="quant">GGUF quant</label><input type="text" id="quant" placeholder="Q4_K_M"></div>
+      <div><label for="subfolder">Subfolder</label><input type="text" id="subfolder" placeholder="ep3"></div>
+    </div>
+    <label style="margin-top:8px"><input type="checkbox" id="trust"> allow the repo's custom code (safetensors)</label>
+    <label><input type="checkbox" id="cpu"> CPU only</label>
+    <div class="row" style="margin-top:12px"><button class="primary" id="go">Run</button><button class="ghost" id="stop" disabled>Stop</button></div>
+    <div class="eng" id="eng"></div>
+  </aside>
+  <section class="main">
+    <div class="tabs" id="tabs"><button data-v="run" class="on">Run</button><button data-v="results">Results</button></div>
+    <div id="view-run">
+      <h2 id="title" style="margin-top:16px">Pick a model and press Run</h2>
+      <div class="grid" id="bars"></div>
+      <div class="log card" id="log" style="margin-top:12px;min-height:80px"></div>
+      <div id="summary"></div>
+    </div>
+    <div id="view-results" hidden>
+      <div class="row" style="margin-top:16px"><button class="ghost" id="openDir">Open results folder</button><span class="note" id="dir"></span></div>
+      <div class="tablewrap"><table id="results"><thead><tr><th>Date</th><th>Model</th><th>Profile</th><th class="num">decide</th><th class="num">KL</th><th class="num">answer</th><th class="num">reason</th></tr></thead><tbody></tbody></table></div>
+    </div>
+  </section>
+</div>
+<input type="file" id="fileInput" accept=".gguf" hidden>
+<script src="app.js"></script>
+</body>
+</html>
