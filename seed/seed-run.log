@@ -13,3 +13,6 @@
   decide  acc 0.334 [0.309–0.359]  KL 0.709  Brier 0.429  ECE 0.102  n=1500  adapter=systemone  coverage 7%  p50 0 ms
 /dev/disk3s1s1   460Gi    13Gi    30Gi    31%    484k  311M    0%   /
 === d1-2b 19:45:18
+  decide  acc 0.580 [0.554–0.605]  KL 0.635  Brier 0.360  ECE 0.107  n=1500  adapter=systemone  coverage 100%  p50 1698 ms
+/dev/disk3s1s1   460Gi    13Gi    29Gi    31%    484k  299M    0%   /
+=== lfm2-350m 19:52:57
