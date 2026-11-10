@@ -104,8 +104,17 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: gh release upload "$TAG" dist/* --clobber
 
-  checksums:
+  flatpak:
     needs: app
+    permissions:
+      contents: write
+    uses: ./.github/workflows/flatpak.yml
+    with:
+      tag: ${{ inputs.tag || github.ref_name }}
+      upload: true
+
+  checksums:
+    needs: [app, flatpak]
     runs-on: ubuntu-latest
     permissions:
       contents: write

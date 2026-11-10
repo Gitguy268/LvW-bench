@@ -1,0 +1,60 @@
+# Self-hosted Flatpak of the LvW-bench desktop app. It repackages the Linux app binary from a
+# release (LvW-bench-<version>-linux-amd64.tar.gz, put next to this file as lvw-bench-linux.tar.gz)
+# and builds llama.cpp's llama-server from source for GGUF models. CI does this in
+# .github/workflows/flatpak.yml.
+app-id: io.github.gitguy268.lvw_bench
+runtime: org.gnome.Platform
+runtime-version: '48'
+sdk: org.gnome.Sdk
+command: lvw-bench-app
+finish-args:
+  - --share=ipc
+  - --share=network
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --device=dri
+modules:
+  - name: llama-cpp
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DGGML_NATIVE=OFF
+      - -DLLAMA_CURL=OFF
+      - -DLLAMA_BUILD_TESTS=OFF
+      - -DLLAMA_BUILD_EXAMPLES=OFF
+      - -DLLAMA_BUILD_TOOLS=ON
+      - -DLLAMA_BUILD_SERVER=ON
+    post-install:
+      - install -Dm644 LICENSE /app/share/licenses/io.github.gitguy268.lvw_bench/LICENSE.llama.cpp
+    cleanup:
+      - /include
+      - /lib/cmake
+      - /lib/pkgconfig
+    sources:
+      - type: git
+        url: https://github.com/ggml-org/llama.cpp.git
+        tag: v0.9.0
+        commit: cd959bae99ff4bed22bef2604f45241c09bbb8c8
+  - name: lvw-bench
+    buildsystem: simple
+    build-commands:
+      - tar -xzf lvw-bench-linux.tar.gz
+      - install -Dm755 LvW-bench /app/bin/lvw-bench-app
+      - install -Dm644 io.github.gitguy268.lvw_bench.desktop /app/share/applications/io.github.gitguy268.lvw_bench.desktop
+      - install -Dm644 io.github.gitguy268.lvw_bench.metainfo.xml /app/share/metainfo/io.github.gitguy268.lvw_bench.metainfo.xml
+      - install -Dm644 appicon.png /app/share/icons/hicolor/512x512/apps/io.github.gitguy268.lvw_bench.png
+      - install -Dm644 LICENSE /app/share/licenses/io.github.gitguy268.lvw_bench/LICENSE
+      - install -Dm644 NOTICE /app/share/licenses/io.github.gitguy268.lvw_bench/NOTICE
+    sources:
+      - type: file
+        path: lvw-bench-linux.tar.gz
+      - type: file
+        path: ../../app/build/appicon.png
+      - type: file
+        path: ../../LICENSE
+      - type: file
+        path: ../../NOTICE
+      - type: file
+        path: io.github.gitguy268.lvw_bench.desktop
+      - type: file
+        path: io.github.gitguy268.lvw_bench.metainfo.xml
