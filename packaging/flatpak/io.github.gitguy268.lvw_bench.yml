@@ -38,7 +38,7 @@ modules:
   - name: lvw-bench
     buildsystem: simple
     build-commands:
-      - tar -xzf lvw-bench-linux.tar.gz
+      - tar --no-same-owner -xzf lvw-bench-linux.tar.gz
       - install -Dm755 LvW-bench /app/bin/lvw-bench-app
       - install -Dm644 io.github.gitguy268.lvw_bench.desktop /app/share/applications/io.github.gitguy268.lvw_bench.desktop
       - install -Dm644 io.github.gitguy268.lvw_bench.metainfo.xml /app/share/metainfo/io.github.gitguy268.lvw_bench.metainfo.xml
