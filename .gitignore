@@ -9,3 +9,10 @@ __pycache__/
 node_modules/
 .env
 /seed/*.log
+
+# Flatpak build output (packaging/flatpak)
+packaging/flatpak/lvw-bench-linux.tar.gz
+packaging/flatpak/build/
+packaging/flatpak/repo/
+packaging/flatpak/.flatpak-builder/
+*.flatpak

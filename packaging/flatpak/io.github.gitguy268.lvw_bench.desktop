@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=LvW-bench
+Comment=Local benchmark for tiny AI models
+Exec=lvw-bench-app
+Icon=io.github.gitguy268.lvw_bench
+Terminal=false
+Categories=Development;Science;
+Keywords=benchmark;llm;gguf;ai;model;
