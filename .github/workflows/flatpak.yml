@@ -1,0 +1,68 @@
+name: Flatpak
+
+# Builds the self-hosted Flatpak of the desktop app from a release's Linux binary. Pull requests
+# use the latest release; the Release workflow calls this with its tag and uploads the bundle.
+on:
+  pull_request:
+    paths: [packaging/flatpak/**, .github/workflows/flatpak.yml]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag whose Linux binary to package, e.g. v0.1.0
+        required: true
+  workflow_call:
+    inputs:
+      tag:
+        type: string
+        required: true
+      upload:
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Flatpak (x86_64)
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-48
+      options: --privileged
+    steps:
+      - uses: actions/checkout@v7
+      - name: Download the Linux app binary
+        env:
+          TAG: ${{ inputs.tag }}
+        run: |
+          if [ -z "$TAG" ]; then
+            TAG=$(curl -fsSL -o /dev/null -w '%{url_effective}' "https://github.com/$GITHUB_REPOSITORY/releases/latest" | sed 's#.*/tag/##')
+          fi
+          echo "Packaging $TAG"
+          curl -fsSL -o packaging/flatpak/lvw-bench-linux.tar.gz \
+            "https://github.com/$GITHUB_REPOSITORY/releases/download/$TAG/LvW-bench-${TAG#v}-linux-amd64.tar.gz"
+      - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+        with:
+          manifest-path: packaging/flatpak/io.github.gitguy268.lvw_bench.yml
+          bundle: io.github.gitguy268.lvw_bench.flatpak
+          artifact-name: flatpak
+          cache-key: flatpak-builder-lvw-bench
+      - run: appstreamcli validate --no-net --explain packaging/flatpak/io.github.gitguy268.lvw_bench.metainfo.xml
+
+  upload:
+    name: Attach to the release
+    if: inputs.upload
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: flatpak
+          path: out
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+        run: gh release upload "$TAG" out/*.flatpak --clobber --repo "$GITHUB_REPOSITORY"

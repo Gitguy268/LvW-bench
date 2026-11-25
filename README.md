@@ -60,10 +60,14 @@ brew install llama.cpp uv                         # engines: GGUF and safetensor
 | Platform | Terminal | App |
 |---|---|---|
 | macOS | Homebrew, or `lvwb-*-darwin-*.tar.gz` | Homebrew cask, or `LvW-bench-*-macos-universal.zip` |
-| Linux | Homebrew, or `lvwb-*-linux-*.tar.gz` | `lvw-bench-app_*_amd64.deb` or `LvW-bench-*-linux-amd64.tar.gz` |
+| Linux | Homebrew, or `lvwb-*-linux-*.tar.gz` | `io.github.gitguy268.lvw_bench.flatpak`, `lvw-bench-app_*_amd64.deb` or `LvW-bench-*-linux-amd64.tar.gz` |
 | Windows | `lvwb-*-windows-*.zip` | `LvW-bench-*-windows-amd64-setup.exe` |
 
 All of these are on the [releases page](https://github.com/Gitguy268/LvW-bench/releases).
+
+The Flatpak installs with `flatpak install --user ./io.github.gitguy268.lvw_bench.flatpak` (add
+Flathub as a remote first for the runtime). It includes llama.cpp for GGUF models but not uv. It
+is built by this repo, not Flathub; see [packaging/flatpak](packaging/flatpak/README.md).
 `SHA256SUMS.txt` lists the checksums.
 
 The release builds are not signed. On macOS, the cask removes the quarantine flag; if you

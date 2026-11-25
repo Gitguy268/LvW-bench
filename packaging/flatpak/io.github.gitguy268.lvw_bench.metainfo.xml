@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.gitguy268.lvw_bench</id>
+  <name>LvW-bench</name>
+  <summary>Local benchmark for tiny AI models</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <developer id="io.github.gitguy268">
+    <name>Lucas Van De Weerd</name>
+  </developer>
+  <description>
+    <p>LvW-bench scores small language models on your own computer, in three tracks: typed decisions (System 1), answers with thinking off and reasoning with thinking on (System 2).</p>
+    <p>This Flatpak runs GGUF models with the llama.cpp server it includes. Safetensors models need uv, which isn't included.</p>
+  </description>
+  <launchable type="desktop-id">io.github.gitguy268.lvw_bench.desktop</launchable>
+  <url type="homepage">https://github.com/Gitguy268/LvW-bench</url>
+  <url type="bugtracker">https://github.com/Gitguy268/LvW-bench/issues</url>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/Gitguy268/LvW-bench/main/docs/app.png</image>
+      <caption>The desktop app</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Development</category>
+    <category>Science</category>
+  </categories>
+  <content_rating type="oars-1.1"/>
+  <releases>
+    <release version="0.1.0" date="2026-11-05"/>
+  </releases>
+</component>
